@@ -19,10 +19,10 @@ int	ft_putptr(void *ptr)
 
 	count = 0;
 	if (!ptr)
-		return (write(1, "0x0", 3));
+		return (write(1, "(nil)", 5));
 	addr = (unsigned long)ptr;
 	count += write(1, "0x", 2);
-	count += ft_puthex(addr, 'p');
+	count += ft_puthex(addr, 'x');
 	return (count);
 }
 /*
@@ -50,6 +50,23 @@ int	main(void)
 	printf(" ← (%d caractères)\n", count);
 
 	free(ptr_heap);
+	return (0);
+}
+
+#include "../ft_printf.h"
+#include <stdio.h>
+
+int	main(void)
+{
+	int	count;
+
+	count = 0;
+	count += ft_putchar(' ');
+	count += ft_putptr(NULL);
+	count += ft_putchar(' ');
+	count += ft_putptr(NULL);
+	count += ft_putchar(' ');
+	printf("Caractères imprimés : %d\n", count);
 	return (0);
 }
 */
