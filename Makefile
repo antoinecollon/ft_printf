@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acollon <acollon@student.s19.be>           +#+  +:+       +#+         #
+#    By: acollon <acollon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/13 14:39:44 by acollon           #+#    #+#              #
-#    Updated: 2025/04/13 14:56:07 by acollon          ###   ########.fr        #
+#    Updated: 2025/04/24 18:55:32 by acollon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,6 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-# === Partie test ===
-TEST_SRC = test/main.c
-TEST_EXE = test_printf
-# ===================
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -45,11 +40,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(TEST_EXE) # à commenter si besoin
 
 re: fclean all
 
-test: $(NAME)
-	$(CC) $(CFLAGS) $(TEST_SRC) $(NAME) -o $(TEST_EXE)
-
-.PHONY: clean re fclean all test
+.PHONY: clean re fclean all
