@@ -6,11 +6,13 @@
 #    By: acollon <acollon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/13 14:39:44 by acollon           #+#    #+#              #
-#    Updated: 2025/04/24 18:55:32 by acollon          ###   ########.fr        #
+#    Updated: 2025/04/28 09:38:40 by acollon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_DIR = src
 SRC		=	$(SRC_DIR)/ft_printf.c \
@@ -27,7 +29,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-all: $(NAME)
+# TEST_SRC = test/main.c
+# TEST_EXE = test_printf
+
+all: $(LIBFT) $(NAME)
+
+$(LIBFT):
+	cd $(LIBFT_DIR) && $(MAKE)
 
 $(NAME): $(OBJ)
 	ar rcs $@ $^
@@ -37,10 +45,17 @@ $(NAME): $(OBJ)
 
 clean:
 	$(RM) $(OBJ)
+	cd $(LIBFT_DIR) && $(MAKE) clean
 
 fclean: clean
 	$(RM) $(NAME)
+#	$(RM) $(TEST_EXE)
+	cd $(LIBFT_DIR) && $(MAKE) fclean
 
 re: fclean all
 
-.PHONY: clean re fclean all
+# test: $(NAME)
+#	cd $(LIBFT_DIR) && $(MAKE)
+#	$(CC) $(CFLAGS) $(TEST_SRC) $(NAME) -L$(LIBFT_DIR) -lft -o $(TEST_EXE)
+
+.PHONY: clean re fclean all test
